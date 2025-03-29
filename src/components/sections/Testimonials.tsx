@@ -1,5 +1,5 @@
 // src/components/sections/Testimonials.tsx
-import React, { useState, useEffect, useCallback, useRef } from 'react'; // Added React import back (needed for JSX Fragments <>)
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import styles from './Testimonials.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
@@ -56,9 +56,11 @@ const testimonials: TestimonialData[] = [
 const Testimonials: React.FC = () => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const intervalRef = useRef<NodeJS.Timeout | null>(null);
-    const sliderContainerRef = useRef<HTMLDivElement>(null); // Ref IS used now
+    // Removed sliderContainerRef as sliderViewRef serves the purpose for animation trigger
+    // const sliderContainerRef = useRef<HTMLDivElement>(null);
 
      const { ref: headingRef, inView: headingInView } = useInView({ triggerOnce: true, threshold: 0.1 });
+     // This ref is now used for both triggering the animation and hover events
      const { ref: sliderViewRef, inView: sliderInView } = useInView({ triggerOnce: true, threshold: 0.1 });
 
     const totalSlides = testimonials.length;
@@ -98,11 +100,13 @@ const Testimonials: React.FC = () => {
                     <p>Hear from those who have experienced Mia's unique approach to medium development</p>
                 </div>
 
+                 {/* Attach sliderViewRef here for animation triggering */}
+                 {/* Also attach hover handlers here */}
                  <div
-                    ref={sliderContainerRef} // Attach the ref here
-                    className={`${styles.testimonialSliderContainer} ${sliderInView ? 'animate fade-up' : 'animate'}`}
-                    onMouseEnter={handleMouseEnter}
-                    onMouseLeave={handleMouseLeave}
+                    ref={sliderViewRef} // Attach the ref for Intersection Observer
+                    className={`${styles.testimonialSliderContainer} ${sliderInView ? 'animate fade-up' : 'animate'}`} // Use sliderInView for animation
+                    onMouseEnter={handleMouseEnter} // Pause on hover
+                    onMouseLeave={handleMouseLeave} // Resume on leave
                     aria-roledescription="carousel"
                     aria-label="Testimonials"
                 >
