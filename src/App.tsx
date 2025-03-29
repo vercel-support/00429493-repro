@@ -1,7 +1,8 @@
 // src/App.tsx
 
 // --- Import React Hooks and Router ---
-import React, { useState, useEffect } from 'react';
+// Removed 'React' from this import as it's not explicitly needed with modern JSX transform
+import { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 
 // --- Import Layout and UI Components ---
@@ -39,7 +40,7 @@ function App() {
         } else {
             console.warn('Meta Pixel (window.fbq) not found.');
         }
-        setIsMobileMenuOpen(false); // Close menu on navigation
+        setIsMobileMenuOpen(false);
     }, [location.pathname]);
 
     // Navigation links data
