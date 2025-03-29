@@ -1,0 +1,89 @@
+/* src/components/sections/Header.module.css */
+.header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px 0;
+    z-index: 100;
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--light);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+.logo:hover {
+    opacity: 0.8;
+}
+
+.mobileMenuBtn {
+    display: none; /* Hidden by default, shown in media query */
+    background: none;
+    border: none;
+    color: var(--light);
+    font-size: 1.8rem; /* Slightly larger tap target */
+    cursor: pointer;
+    padding: 5px; /* Add padding for easier tapping */
+    line-height: 1; /* Prevent extra space */
+    border-radius: 4px; /* Subtle rounding */
+}
+.mobileMenuBtn:focus-visible {
+     outline: 2px solid var(--light);
+     outline-offset: 2px;
+}
+
+/* Desktop enroll button - uses global .btn and .btn-light */
+.desktopEnrollBtn {
+   /* Add specific overrides if needed */
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+    .mobileMenuBtn {
+        display: block;
+    }
+
+    .desktopEnrollBtn {
+        display: none; /* Hide desktop button on mobile */
+    }
+     .header {
+        padding: 20px 0; /* Reduce padding on mobile */
+    }
+}
+/* src/components/sections/Hero.module.css */
+
+/* ... (keep existing styles for .hero, .profileImage etc.) ... */
+
+/* Add these rules to override text color inside .hero */
+.hero h1,
+.hero h2, /* Target .profileName */
+.hero p { /* Target .heroSubtitle and .profileTitle */
+    color: var(--light); /* Use the light color variable */
+}
+
+/* Optional: Ensure subtitle isn't too bright if needed */
+.heroSubtitle {
+    opacity: 0.9; /* Keep original opacity */
+}
+
+.profileTitle {
+     opacity: 0.9; /* Keep original opacity */
+}
+
+/* Ensure profile CTA text color is correct if needed (should be primary) */
+.profileCta {
+     color: var(--primary);
+}
+.profileCta:hover {
+     color: var(--primary-dark);
+}

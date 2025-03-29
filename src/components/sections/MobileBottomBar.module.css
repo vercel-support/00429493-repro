@@ -1,0 +1,31 @@
+/* src/components/sections/MobileBottomBar.module.css */
+.mobileBottomBar {
+    display: none; /* Hidden by default, shown via media query */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.98); /* Match original */
+    box-shadow: 0 -5px 10px rgba(0,0,0,0.05);
+    z-index: 150; /* Above most content, below mobile menu maybe */
+    padding: 12px 15px; /* Match original */
+    /* Add backdrop filter for modern look if desired */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Specific button styling if needed */
+.mobileCtaButton {
+    /* Inherits global .btn, .btn-primary, .btn-block */
+    padding: 12px 20px;
+    font-size: 0.95rem;
+    width: 100%;
+    /* Ensure high contrast/visibility */
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+    .mobileBottomBar {
+        display: block; /* Show on mobile */
+    }
+}

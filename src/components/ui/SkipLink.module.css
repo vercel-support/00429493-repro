@@ -1,0 +1,34 @@
+/* src/components/ui/SkipLink.module.css */
+.skipLink {
+    background: var(--primary); /* Use CSS variables from :root */
+    color: var(--light);
+    padding: 10px 20px;
+    position: fixed;
+    top: -100px; /* Initially hidden off-screen */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    text-decoration: none;
+    transition: top 0.3s;
+    border-radius: 0 0 var(--border-radius, 8px) var(--border-radius, 8px); /* Add some rounding */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.skipLink:focus {
+    top: 0; /* Bring into view on focus */
+    outline: 3px solid var(--primary-light, #9742C8); /* Ensure focus outline */
+    outline-offset: 2px;
+}
+
+/* Consider putting .visually-hidden in global index.css if used elsewhere */
+.visuallyHidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0,0,0,0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}

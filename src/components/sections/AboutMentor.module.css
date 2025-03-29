@@ -1,0 +1,58 @@
+/* src/components/sections/AboutMentor.module.css */
+
+/* The main container */
+.aboutMentorContainer { background-color: var(--secondary); border-radius: var(--border-radius); position: relative; overflow: hidden; padding: 60px 0; margin: 0; }
+.aboutMentorContainer::before { content: ""; position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background-color: var(--primary-light); border-radius: 50%; opacity: 0.08; pointer-events: none; z-index: 0; }
+.aboutMentorContainer::after { content: ""; position: absolute; bottom: -50px; left: -50px; width: 200px; height: 200px; background-color: var(--accent-secondary); border-radius: 50%; opacity: 0.08; pointer-events: none; z-index: 0; }
+.innerContainer { max-width: 1200px; margin: 0 auto; padding: 0 30px; position: relative; z-index: 1; }
+.mentorHeading { margin-bottom: 40px; }
+
+/* Grid layout */
+.aboutMentorGrid { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: center; }
+
+/* Image */
+.mentorImageContainer { position: relative; transition: transform 0.3s ease; max-width: 400px; margin: 0 auto; width: 100%; }
+.mentorImage { border-radius: var(--border-radius); box-shadow: var(--box-shadow); object-fit: cover; object-position: center 25%; width: 100%; height: auto; display: block; }
+.mentorAccent { position: absolute; top: -15px; left: -15px; width: 60%; height: 60%; background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%); border-radius: var(--border-radius); opacity: 0.1; z-index: -1; pointer-events: none; }
+
+/* Content */
+.mentorContent p { margin-bottom: 1.5rem; font-size: 1.125rem; line-height: 1.7; }
+.mentorContent p:last-child { margin-bottom: 0; }
+
+/* Stats */
+.mentorStats { display: flex; flex-wrap: wrap; gap: 20px; margin: 30px 0; }
+.mentorStatItem { background-color: var(--light); border-radius: var(--border-radius); padding: 15px; text-align: center; box-shadow: var(--box-shadow); flex: 1 1 150px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.mentorStatItem:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+.mentorStatNumber { font-size: 1.8rem; font-weight: 800; color: var(--primary); line-height: 1.2; margin-bottom: 4px; }
+.mentorStatLabel { font-size: 0.8rem; font-weight: 500; color: var(--text); text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* Mentor Quote block - Padding reset */
+.mentorQuote {
+    font-style: italic;
+    background-color: var(--light);
+    padding: 25px; /* Reverted to original base padding */
+    border-radius: var(--border-radius);
+    margin: 30px 0;
+    position: relative;
+    box-shadow: var(--box-shadow);
+    border-left: 4px solid var(--primary);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+.mentorQuote p { margin-bottom: 0; position: relative; z-index: 1; }
+.mentorQuote:hover { transform: translateY(-5px); }
+
+/* REMOVED .mentorQuote::before rule */
+
+/* Responsive */
+@media (min-width: 768px) { .aboutMentorGrid { grid-template-columns: 350px 1fr; gap: 60px; } .mentorImageContainer { margin: 0; } }
+@media (max-width: 991px) { .aboutMentorContainer { padding: 40px 0; } }
+@media (max-width: 767px) {
+     .innerContainer { padding: 0 20px; } .mentorHeading { margin-bottom: 30px; } .aboutMentorGrid { gap: 30px; } .mentorImageContainer { max-width: 300px; }
+     .mentorStats { gap: 15px; margin: 25px 0; } .mentorStatItem { flex-basis: calc(50% - 10px); padding: 12px; } .mentorStatNumber { font-size: 1.6rem; } .mentorStatLabel { font-size: 0.75rem; }
+     .mentorQuote { padding: 20px; font-size: 1rem; margin: 25px 0; } /* Keep mobile padding */
+     /* REMOVED .mentorQuote::before responsive rule */
+     .mentorContent p { font-size: 1rem; margin-bottom: 1.2rem; }
+}

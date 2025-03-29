@@ -1,0 +1,129 @@
+/* src/components/sections/MobileMenu.module.css */
+.mobileMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Use a slightly different color maybe, or match original */
+    background-color: var(--primary-dark, #4A1C66);
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    overflow-y: auto; /* Allow scrolling if content is tall */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+    padding: 0; /* Remove padding, handle with inner wrapper */
+    overscroll-behavior-y: contain; /* Prevent body scroll when menu is open */
+}
+
+.mobileMenu.active {
+    transform: translateX(0);
+}
+
+/* Inner wrapper for padding and structure */
+.menuContentWrapper {
+    padding: 30px;
+    min-height: 100%; /* Ensure wrapper takes full height */
+    display: flex;
+    flex-direction: column;
+}
+
+.mobileMenuHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px; /* Reduced margin */
+    flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+/* Use same logo style as Header, but ensure color is light */
+.logo {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: var(--light);
+    text-decoration: none;
+}
+
+.mobileMenuClose {
+    background: none;
+    border: none;
+    color: var(--light);
+    font-size: 1.8rem; /* Match open button */
+    cursor: pointer;
+    padding: 5px;
+    line-height: 1;
+    border-radius: 4px;
+}
+.mobileMenuClose:focus-visible {
+     outline: 2px solid var(--light);
+     outline-offset: 2px;
+}
+
+
+.mobileMenuLinks {
+    list-style: none;
+    margin: 0 0 30px 0; /* Adjusted margin */
+    padding: 0;
+    flex-grow: 1; /* Allow links to take available space */
+}
+
+.mobileMenuLinks li {
+    margin-bottom: 0; /* Remove default margin */
+}
+
+.mobileMenuLinks a {
+    color: var(--light);
+    text-decoration: none;
+    font-size: 1.1rem; /* From original mobile styles */
+    font-weight: 500;
+    display: block;
+    padding: 15px; /* From original mobile styles */
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    transition: background-color 0.2s ease;
+    border-radius: 8px; /* Added rounding */
+    margin-bottom: 10px; /* Spacing between links */
+}
+
+.mobileMenuLinks a:hover,
+.mobileMenuLinks a:focus {
+    background-color: rgba(255,255,255,0.05);
+    outline: none; /* Remove default focus outline inside menu */
+}
+.mobileMenuLinks a:focus-visible {
+     background-color: rgba(255,255,255,0.1); /* Stronger focus style */
+}
+
+
+/* Mobile Nav CTA - uses global .btn */
+.mobileNavCta {
+    display: block; /* Make it block level */
+    background-color: var(--accent);
+    color: var(--light);
+    padding: 15px 30px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: auto; /* Pushes to bottom if links don't fill space */
+    text-align: center;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+.mobileNavCta:hover {
+    /* Optional: Define hover if needed */
+    transform: none; /* Override global button hover */
+    box-shadow: none;
+}
+.mobileNavCta:active {
+     transform: scale(0.98);
+}
+
+
+/* Accessibility focus state inside dark menu */
+.mobileMenu :focus-visible {
+    outline: 2px solid var(--accent-secondary, #FFB649);
+    outline-offset: 2px;
+}
+/* Override for close button */
+ .mobileMenuClose:focus-visible {
+     outline: 2px solid var(--light);
+}

@@ -1,0 +1,93 @@
+/* src/components/sections/CTA.module.css */
+.ctaSection {
+    /* Inherits from original .cta-section */
+    padding: 120px 0;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--light);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.ctaSection::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    /* Use a subtle pattern or keep placeholder */
+    background-image: url('https://images.unsplash.com/photo-1508515053969-5B7694713f53?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.05; /* Very subtle */
+    z-index: 1;
+    pointer-events: none;
+}
+
+.ctaContent {
+    position: relative;
+    z-index: 2; /* Above background pattern */
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+/* Style the heading specifically if needed (overrides global h2 color) */
+.ctaContent h2 {
+    color: var(--light);
+    margin-bottom: 30px;
+    font-size: clamp(2rem, 4vw, 3rem); /* Slightly smaller than global h2 */
+    line-height: 1.3;
+}
+
+.limitedSpots {
+    /* Inherits from original .limited-spots */
+    display: inline-block;
+    background-color: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2); /* Subtle border */
+    color: var(--light);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    /* Uses global pulse animation */
+}
+
+.quoteEmphasis {
+    /* Inherits from original .quote-emphasis */
+    font-weight: 700;
+    /* Gradient text */
+    background: linear-gradient(to right, #FFFFFF, var(--accent-secondary, #FFB649));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent; /* Fallback */
+    /* Optional subtle glow */
+    filter: drop-shadow(0 0 5px rgba(255, 182, 73, 0.3));
+    padding: 0 5px; /* Avoid clipping */
+    white-space: nowrap; /* Prevent wrapping */
+}
+
+.ctaText {
+    font-size: 1.25rem;
+    margin-bottom: 40px; /* More space before button */
+    line-height: 1.7;
+    opacity: 0.95; /* Slightly less than pure white */
+}
+
+.ctaButton {
+   /* Inherits global .btn, .btn-accent, .btn-large */
+}
+
+.ctaNote {
+    margin-top: 20px;
+    opacity: 0.8;
+    font-size: 0.95rem;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+    .ctaSection { padding: 80px 0; }
+    .ctaContent h2 { font-size: 1.8rem; margin-bottom: 20px; }
+    .limitedSpots { font-size: 1rem; padding: 8px 16px; margin-bottom: 25px;}
+    .ctaText { font-size: 1.1rem; margin-bottom: 30px; }
+    .ctaButton { width: 90%; /* Make button wider but not full */ }
+}

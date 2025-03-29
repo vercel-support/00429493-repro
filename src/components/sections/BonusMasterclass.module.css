@@ -1,0 +1,56 @@
+/* src/components/sections/BonusMasterclass.module.css */
+.bonusSection { background-color: var(--secondary); padding: 80px 0; border-radius: var(--border-radius); margin: 80px 0; position: relative; overflow: hidden; }
+.bonusSection::before { content: ""; position: absolute; top: -30px; right: -30px; width: 150px; height: 150px; background-color: var(--accent-secondary); border-radius: 50%; opacity: 0.15; pointer-events: none; z-index: 0; }
+.bonusSection::after { content: ""; position: absolute; bottom: -50px; left: -50px; width: 200px; height: 200px; background-color: var(--primary-light); border-radius: 50%; opacity: 0.08; pointer-events: none; z-index: 0; }
+.bonusContent { position: relative; z-index: 1; }
+.bonusBadge { display: inline-block; background-color: var(--accent-secondary); color: var(--dark); padding: 8px 20px; border-radius: 50px; font-weight: 700; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px; }
+
+/* Grid layout */
+.bonusGrid {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile first - 1 column */
+    gap: 40px; /* Default gap */
+    align-items: center; /* Vertically center grid items */
+    margin-top: 30px;
+}
+
+/* Image container styles */
+.bonusImage { position: relative; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.mindSpiritContainer { position: relative; max-width: 90%; margin: 0 auto; transition: transform 0.3s ease; width: fit-content; }
+.mindSpiritContainer:hover { transform: translateY(-10px); }
+.mindSpiritImage { width: 100%; max-width: 350px; height: auto; aspect-ratio: 1 / 1; border-radius: 50%; box-shadow: 0 15px 35px rgba(108, 41, 150, 0.25); border: 8px solid rgba(255, 255, 255, 0.8); transition: box-shadow 0.3s ease; display: block; margin: 0 auto; object-fit: cover; }
+.mindSpiritContainer:hover .mindSpiritImage { box-shadow: 0 20px 40px rgba(108, 41, 150, 0.35); }
+.imageGlow { position: absolute; inset: -8px; border-radius: 50%; background: radial-gradient(circle, rgba(151, 66, 200, 0.15) 0%, rgba(151, 66, 200, 0) 70%); z-index: -1; pointer-events: none; animation: pulse 3s infinite ease-in-out; /* Re-enable pulse */ }
+.mindSpiritCaption { margin-top: 20px; font-style: italic; text-align: center; color: var(--primary-dark); font-weight: 500; font-size: 0.95rem; }
+.bonusValue { position: absolute; top: -15px; right: -15px; background-color: var(--accent); color: var(--light); padding: 15px; border-radius: 50%; width: 90px; height: 90px; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 700; line-height: 1.2; box-shadow: var(--box-shadow); z-index: 3; text-align: center; }
+.bonusValue span:first-child { font-size: 0.8rem; text-transform: uppercase; display: block; }
+.bonusValue span:last-child { font-size: 1.3rem; font-weight: 800; display: block; }
+
+/* Text content container */
+.bonusTextContent { text-align: left; }
+.bonusTextContent h3 { margin-bottom: 1rem; }
+.bonusChecklist { margin: 25px 0; /* inherits global .check-list */ }
+.bonusChecklist li { line-height: 1.6; font-size: 1.05rem; }
+.bonusChecklist li strong { color: var(--primary-dark); font-weight: 700; }
+.bonusHighlight { margin: 30px 0; /* inherits global .highlight-box */ }
+.bonusHighlight p { margin-bottom: 0; }
+
+/* Responsive */
+@media (min-width: 992px) {
+    .bonusGrid {
+        /* Desktop: Explicit columns, maybe favoring text */
+        grid-template-columns: minmax(350px, 450px) 1fr; /* Image column width range */
+        gap: 60px;
+    }
+    .mindSpiritContainer { max-width: 100%; }
+    .bonusImage { align-items: center; }
+}
+@media (max-width: 767px) {
+    .bonusSection { padding: 60px 0; margin: 60px 0; }
+    .bonusGrid { gap: 30px; }
+    .mindSpiritContainer { max-width: 75%; margin-bottom: 20px; }
+    .bonusValue { width: 70px; height: 70px; padding: 10px; top: -10px; right: 0; font-size: 0.9rem; }
+    .bonusValue span:first-child { font-size: 0.65rem; }
+    .bonusValue span:last-child { font-size: 1rem; }
+    .bonusChecklist li { font-size: 1rem; }
+}

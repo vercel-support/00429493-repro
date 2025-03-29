@@ -1,0 +1,75 @@
+// src/App.tsx
+
+// --- Import React Hooks and Router ---
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
+
+// --- Import Layout and UI Components ---
+import SkipLink from './components/ui/SkipLink';
+import Header from './components/sections/Header';
+import MobileMenu from './components/sections/MobileMenu';
+import Footer from './components/sections/Footer';
+import MobileBottomBar from './components/sections/MobileBottomBar';
+
+// --- Import Page Components ---
+import LandingPage from './pages/LandingPage';
+import ThankYouPage from './pages/ThankYouPage';
+
+// Declare fbq global function for TypeScript
+declare global { interface Window { fbq?: (...args: any[]) => void; } }
+
+// --- Main App Component ---
+function App() {
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const location = useLocation();
+
+    const toggleMobileMenu = () => { setIsMobileMenuOpen(prevState => !prevState); };
+
+    // Effect to control body scrolling
+    useEffect(() => {
+        document.body.style.overflow = isMobileMenuOpen ? 'hidden' : '';
+        return () => { document.body.style.overflow = ''; };
+    }, [isMobileMenuOpen]);
+
+    // Effect for Meta Pixel PageView Tracking & closing mobile menu
+    useEffect(() => {
+        if (window.fbq) {
+            console.log('Meta Pixel: Tracking PageView for', location.pathname);
+            window.fbq('track', 'PageView');
+        } else {
+            console.warn('Meta Pixel (window.fbq) not found.');
+        }
+        setIsMobileMenuOpen(false); // Close menu on navigation
+    }, [location.pathname]);
+
+    // Navigation links data
+    const navLinks = [
+        { href: "/#about", label: "About the Program" }, { href: "/#about-mentor", label: "About Mia" },
+        { href: "/#schedule", label: "Class Schedule" }, { href: "/#curriculum", label: "What You'll Learn" },
+        { href: "/#bonus", label: "Bonus Masterclass" }, { href: "/#testimonials", label: "Success Stories" },
+        { href: "/#pricing", label: "Join Now" }, { href: "/#faq", label: "FAQ" }
+    ];
+
+    const isThankYouPage = location.pathname === '/thank-you';
+
+    // --- Render the application's UI structure ---
+    return (
+        <>
+            <SkipLink targetId="main-content" />
+            {!isThankYouPage && <Header onMenuToggle={toggleMobileMenu} navLinks={navLinks} />}
+            {!isThankYouPage && <MobileMenu isOpen={isMobileMenuOpen} onClose={toggleMobileMenu} navLinks={navLinks} />}
+
+            <main id="main-content" role="main">
+                <Routes>
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="/thank-you" element={<ThankYouPage />} />
+                </Routes>
+            </main>
+
+            {!isThankYouPage && <Footer navLinks={navLinks} />}
+            {!isThankYouPage && <MobileBottomBar />}
+        </>
+    );
+}
+
+export default App;

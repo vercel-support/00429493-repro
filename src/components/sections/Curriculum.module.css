@@ -1,0 +1,99 @@
+/* src/components/sections/Curriculum.module.css */
+
+/* Grid layout for content and images */
+.contentGrid {
+    display: grid;
+    /* Default to 1 column, switch later */
+    grid-template-columns: 1fr;
+    gap: 40px; /* Gap for mobile */
+    align-items: center;
+}
+
+/* Left content column */
+.contentLeft {
+   width: 100%; /* Take full width in single column */
+}
+
+.curriculumSubtitle {
+    /* Inherits global .section-subtitle */
+    display: block; /* Ensure it takes its own line */
+    margin-bottom: 20px; /* Space below subtitle */
+}
+
+/* Check list inherits global .check-list styles */
+.checkList {
+   /* Add overrides if needed */
+   margin-bottom: 30px; /* Ensure consistent spacing */
+}
+
+ /* Heart wrapper inherits global .heart-wrapper styles */
+ .heartWrapper {
+   /* Add overrides if needed */
+ }
+
+
+/* Highlight box inherits global .highlight-box */
+.highlightBox {
+   /* Add overrides if needed */
+   margin: 30px 0;
+}
+
+/* CTA Button */
+.curriculumCta {
+    /* Inherits global .btn, .btn-primary */
+    margin-top: 10px; /* Add some space above */
+}
+
+
+/* Right image column */
+.contentImage {
+    /* Inherits original .content-image styles for desktop */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+}
+
+.contentImage img {
+     /* Inherits original styles */
+    width: 80%; /* Smaller images */
+    max-width: 400px; /* Max size */
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.contentImage img:hover {
+    transform: translateY(-10px);
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+    .contentGrid {
+        /* Switch to 2 columns on tablet+ */
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+    }
+}
+
+@media (max-width: 767px) {
+    .contentGrid {
+        gap: 20px; /* Reduce gap */
+    }
+    .contentLeft {
+        padding: 0; /* Reset padding if any */
+    }
+    /* Hide the image column on mobile - matches original CSS */
+    .contentImage {
+         display: none !important;
+    }
+     .checkList li {
+         font-size: 1rem; /* Slightly smaller text */
+     }
+     .curriculumCta {
+         width: 100%; /* Make button full width */
+         text-align: center;
+     }
+}

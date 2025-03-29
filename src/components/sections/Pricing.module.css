@@ -1,0 +1,232 @@
+/* src/components/sections/Pricing.module.css */
+
+/* Style for the whole section if needed, e.g., background */
+.pricingSection {
+    background-color: var(--secondary); /* Use global variable */
+  }
+  
+  /* Style for the specific banner within this section */
+  .pricingBanner {
+      /* Inherits from global .banner but apply specific overrides */
+      background-color: rgba(255, 107, 107, 0.15) !important; /* Use !important carefully if needed */
+      border-left-color: var(--accent); /* Ensure correct border color */
+      max-width: 600px;
+      margin: 30px auto !important; /* Center and add margin */
+  }
+  /* Ensure icon color matches border */
+  .pricingBanner .banner-icon {
+      color: var(--accent);
+  }
+  
+  
+  /* Grid layout for pricing cards */
+  .pricingGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 40px;
+      margin-top: 60px;
+  }
+  
+  /* Individual pricing card */
+  .pricingCard {
+      background-color: var(--light);
+      border-radius: var(--border-radius);
+      box-shadow: var(--box-shadow);
+      overflow: hidden;
+      transition: var(--transition);
+      display: flex; /* Use flex to control body height */
+      flex-direction: column; /* Stack header and body */
+  }
+  
+  .pricingCard:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  }
+  
+  /* Card header */
+  .pricingHeader {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: var(--light);
+      padding: 30px;
+      text-align: center;
+      flex-shrink: 0; /* Prevent header from shrinking */
+  }
+  
+  .pricingTitle {
+      font-family: 'Outfit', sans-serif; /* Ensure font */
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      color: var(--light); /* Ensure white */
+      font-weight: 700; /* Match h3/h4 styles */
+      line-height: 1.3;
+  }
+  
+  .pricingPrice {
+      font-family: 'Outfit', sans-serif; /* Ensure font */
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: var(--light); /* Ensure white */
+      line-height: 1;
+  }
+  
+  .pricingPeriod {
+      opacity: 0.8;
+      font-size: 1rem;
+      color: var(--light); /* Ensure white */
+  }
+  
+  /* Card body */
+  .pricingBody {
+      padding: 40px;
+      flex-grow: 1; /* Allow body to fill remaining space */
+      display: flex;
+      flex-direction: column; /* Stack features list and button */
+  }
+  
+  /* Features list */
+  .pricingFeatures {
+      list-style: none;
+      margin: 0 0 30px 0; /* Reset margin, add bottom */
+      padding: 0; /* Reset padding */
+      flex-grow: 1; /* Allow list to push button down */
+  }
+  
+  .pricingFeatures li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      position: relative;
+      padding-left: 30px;
+      min-height: 44px; /* Touch target */
+      display: flex; /* Align checkmark with text */
+      align-items: center;
+      font-size: 1rem; /* Consistent text size */
+      line-height: 1.6; /* Readability */
+  }
+  
+  /* Checkmark pseudo-element */
+  .pricingFeatures li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      top: 50%; /* Center vertically */
+      transform: translateY(-50%);
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 1.1rem; /* Slightly larger checkmark */
+  }
+  
+  .pricingFeatures li:last-child {
+      border-bottom: none;
+  }
+  
+  /* Premium Feature Highlight */
+  .premiumFeature {
+      /* These rules apply IN ADDITION to the base li styles */
+      background-color: rgba(255, 182, 73, 0.08);
+      border-left: 3px solid var(--accent-secondary);
+      /* Adjust padding/margin carefully to align with checkmark and border */
+      padding: 12px 15px 12px 30px !important; /* Override base padding-left */
+      margin: -13px 0 -12px -3px; /* Pull left to cover border, adjust vertical margin */
+      position: relative; /* Needed for margin adjustments */
+      transition: background-color 0.3s ease;
+  }
+  /* Adjust checkmark position for highlighted features */
+  .premiumFeature::before {
+       left: 10px !important; /* Move checkmark relative to new padding */
+  }
+  
+  .premiumFeature:hover {
+      background-color: rgba(255, 182, 73, 0.15);
+  }
+  
+  /* Style for the "(worth €300)" part */
+  .premiumValue {
+      color: var(--accent); /* Match border color */
+      font-weight: 700;
+      margin-left: 5px; /* Space from main text */
+      font-size: 0.9em; /* Slightly smaller */
+  }
+  
+  /* Negative Feature Styling */
+  .negativeFeature {
+      /* Apply IN ADDITION to base li styles */
+      background-color: rgba(255, 107, 107, 0.08);
+      border-left: 3px solid var(--accent);
+      padding: 12px 15px 12px 30px !important;
+      margin: -13px 0 -12px -3px;
+      position: relative;
+      transition: background-color 0.3s ease;
+      text-decoration: line-through;
+      color: #888; /* Dimmed text */
+  }
+  
+  /* Cross mark pseudo-element */
+  .negativeFeature::before {
+      content: "✕" !important; /* Use cross mark */
+      color: var(--accent) !important; /* Match border color */
+      left: 10px !important; /* Align with premium checkmark */
+      font-size: 1rem; /* Adjust size */
+  }
+  
+  /* Button specific styling if needed */
+  .pricingButton {
+       /* Inherits global .btn, .btn-primary, .btn-block */
+       margin-top: auto; /* Pushes button to the bottom of the flex container */
+  }
+  
+  /* Note below button */
+  .pricingNote {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: var(--text);
+      opacity: 0.8;
+      margin-bottom: 0; /* Reset default */
+  }
+  
+  /* Refund note at the bottom of the section */
+  .refundNote {
+      text-align: center;
+      margin-top: 40px;
+  }
+  
+  .refundNote p {
+      font-style: italic;
+      max-width: 700px;
+      margin: 0 auto 20px;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--text);
+      opacity: 0.9;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 767px) {
+      .pricingGrid {
+          grid-template-columns: 1fr; /* Stack cards */
+          gap: 30px;
+      }
+      .pricingCard {
+          margin-bottom: 0; /* Remove extra margin as gap handles it */
+      }
+      .pricingHeader {
+          padding: 25px 20px;
+      }
+       .pricingPrice {
+           font-size: 2.5rem;
+       }
+      .pricingBody {
+          padding: 25px 20px;
+      }
+      /* Adjust highlight margins for mobile padding */
+      .premiumFeature, .negativeFeature {
+           margin-left: -20px - 3px; /* Account for padding and border */
+           padding-left: 20px + 10px !important; /* Match li padding-left */
+      }
+       .premiumFeature::before, .negativeFeature::before {
+          left: 10px !important; /* Adjust position relative to padding */
+      }
+      .refundNote { margin-top: 30px; }
+      .refundNote p { font-size: 0.9rem; }
+  }

@@ -1,0 +1,12 @@
+/* src/components/sections/AboutProgram.module.css */
+.spotsBanner { background-color: rgba(255, 107, 107, 0.1); border-left-color: var(--accent); }
+.spotsBanner .banner-icon { color: var(--accent); }
+.statsGrid { /* Inherits global */ }
+.whyDifferentSection { margin-top: 60px; }
+.whyDifferentContent { max-width: 800px; margin: 0 auto; }
+.whyDifferentContent h3 { margin-bottom: 1.5rem; }
+.highlightBox { /* Inherits global */ }
+.tagsContainer { margin-top: 30px; text-align: left; }
+.tagItem { /* Inherits base styles from global .tag */ /* Base transition is inherited */ }
+.tagItem:hover { transform: translateY(-5px); background-color: var(--primary-light); color: var(--light); cursor: default; }
+@media (max-width: 767px) { .whyDifferentSection { margin-top: 40px; } .tagsContainer { text-align: center; } }

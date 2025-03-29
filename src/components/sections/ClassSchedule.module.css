@@ -1,0 +1,213 @@
+/* src/components/sections/ClassSchedule.module.css */
+
+.compactSchedule {
+    background-color: var(--light);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    max-width: 800px;
+    margin: 0 auto; /* Center the schedule box */
+}
+
+.scheduleHeader {
+    background-color: var(--primary);
+    color: var(--light);
+    padding: 20px 30px;
+    text-align: center;
+}
+
+/* Header h3 inherits global styles */
+.scheduleHeader h3 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--light); /* Ensure color */
+}
+
+/* Specific style for subtitle p tag */
+.scheduleHeaderSubtitle {
+    margin: 8px 0 0;
+    font-size: 1.1rem;
+    opacity: 0.9;
+    color: var(--light); /* Ensure color */
+}
+
+
+.scheduleGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 0; /* No gap, borders define separation */
+}
+
+.scheduleItem {
+    padding: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Space out date and duration */
+    transition: background-color 0.3s ease;
+    min-height: 44px; /* Touch target */
+}
+
+.scheduleItem:hover {
+    background-color: var(--secondary);
+}
+
+/* Vertical border for left column items */
+.scheduleItem:nth-child(odd) {
+    border-right: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Remove bottom border for last row */
+.scheduleItem:nth-last-child(-n+2) { /* Selects last two items */
+   border-bottom: none;
+}
+ /* If grid has odd number, last item spans full width */
+.scheduleItem:last-child:nth-child(odd) {
+   grid-column: 1 / -1; /* Span both columns */
+   border-right: none; /* No right border if it spans */
+   /* Ensure last item still potentially has bottom border removed */
+   border-bottom: none;
+}
+ /* Fix border removal if last item is even */
+ .scheduleItem:last-child:nth-child(even){
+    border-bottom: none;
+ }
+ /* Fix border removal if second-to-last is odd and grid has even items */
+ .scheduleGrid > .scheduleItem:nth-last-child(2):nth-child(odd) {
+     border-bottom: none;
+ }
+
+
+.scheduleDate {
+    font-weight: 600;
+    color: var(--text);
+    flex: 1; /* Allow date to take space */
+    margin-right: 10px; /* Space before duration */
+    font-size: 1rem; /* Base size */
+}
+
+.scheduleDuration {
+    display: inline-block;
+    background-color: var(--secondary);
+    color: var(--primary);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    white-space: nowrap; /* Prevent wrapping */
+    flex-shrink: 0; /* Prevent duration from shrinking */
+}
+
+/* Note below the schedule */
+.scheduleNote {
+    /* Inherits from original .schedule-note */
+    background-color: rgba(255, 182, 73, 0.1); /* Use accent-secondary color */
+    padding: 20px;
+    border-radius: var(--border-radius);
+    margin-top: 30px;
+    font-style: italic;
+    max-width: 800px; /* Match schedule width */
+    margin-left: auto;
+    margin-right: auto;
+    transition: transform 0.3s ease;
+    border: 1px solid rgba(255, 182, 73, 0.2); /* Add subtle border */
+    font-size: 0.95rem;
+}
+.scheduleNote p {
+    margin-bottom: 0; /* Remove default p margin */
+}
+
+.scheduleNote:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+/* Timezone Alert */
+.timezoneAlert {
+    /* Inherits from original .timezone-alert */
+    background-color: rgba(255, 107, 107, 0.1); /* Accent color */
+    border-left: 4px solid var(--accent);
+    padding: 15px 20px;
+    margin: 30px auto 0 auto; /* Add margin above, center */
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    display: flex;
+    align-items: center;
+    max-width: 800px; /* Match schedule width */
+}
+
+.timezoneIcon {
+    font-size: 1.5rem;
+    margin-right: 15px;
+    color: var(--accent);
+    flex-shrink: 0;
+}
+
+.timezoneContent {
+    flex: 1;
+}
+
+.timezoneContent p {
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.timezoneContent a {
+    color: var(--primary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.timezoneContent a:hover {
+    color: var(--primary-light);
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+    .scheduleGrid {
+        grid-template-columns: 1fr; /* Stack items on mobile */
+    }
+
+    .scheduleItem {
+        border-right: none !important; /* Remove all right borders */
+         padding: 15px;
+    }
+
+    /* Ensure all but the very last item have a bottom border */
+    .scheduleItem:not(:last-child) {
+         border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+     .scheduleItem:last-child {
+         border-bottom: none; /* Explicitly remove for last */
+     }
+
+    .scheduleDate {
+        font-size: 0.95rem;
+    }
+     .scheduleDuration {
+        font-size: 0.8rem;
+        padding: 3px 10px;
+    }
+
+    .timezoneAlert, .scheduleNote {
+        margin-left: 0;
+        margin-right: 0;
+        max-width: none; /* Allow full width */
+        padding: 15px;
+    }
+     .timezoneContent p {
+         font-size: 0.9rem;
+     }
+     .timezoneContent a {
+         font-size: 0.9rem;
+     }
+     .scheduleNote {
+         font-size: 0.9rem;
+     }
+}

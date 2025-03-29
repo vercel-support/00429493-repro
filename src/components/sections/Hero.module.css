@@ -1,0 +1,224 @@
+/* src/components/sections/Hero.module.css */
+.hero {
+    /* Use CSS variables defined in :root (index.css) */
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: var(--light); /* Default text color for the section */
+    padding: 200px 0 120px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background pattern */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 100%;
+    /* Use a placeholder or a more relevant background */
+    background-image: url('https://images.unsplash.com/photo-1508515053969-5B7694713f53?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'); /* Example subtle texture */
+    background-size: cover;
+    background-position: center;
+    opacity: 0.08; /* Make it more subtle */
+    z-index: 1;
+    pointer-events: none; /* Allow clicks through */
+}
+
+.heroContainer {
+    /* Uses global .container for max-width, padding */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    position: relative; /* Ensure content is above ::before */
+    z-index: 2;
+}
+
+.heroContent {
+    flex: 1;
+    max-width: 600px;
+}
+
+/* h1 styled globally, but color overridden below */
+
+.heroSubtitle {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 30px;
+    opacity: 0.9;
+    line-height: 1.5; /* Improved readability */
+    /* Color overridden below */
+}
+
+.eyebrow {
+    display: inline-block;
+    background-color: rgba(255,255,255,0.1);
+    color: var(--light);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Profile specific styles */
+.profileContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.profileImageWrapper {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.profileImage {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 20%;
+    border: 4px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    display: block; /* Remove extra space */
+}
+
+.profileGlow {
+    position: absolute;
+    top: -10px; left: -10px; right: -10px; bottom: -10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
+    z-index: -1;
+}
+
+/* Profile name uses h2 tag */
+.profileName {
+    /* color: var(--light); Will be overridden below */
+    font-size: 1.8rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 8px; /* Reduced margin */
+    line-height: 1.3;
+}
+
+.profileTitle {
+    /* color: var(--light); Will be overridden below */
+    opacity: 0.9;
+    text-align: center;
+    font-size: 1rem;
+    max-width: 300px;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.profileSpots {
+    display: inline-block;
+    background-color: rgba(255,255,255,0.15);
+    color: var(--light);
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    /* Ensure global pulse animation is defined in index.css */
+}
+
+.profileCta {
+    background-color: var(--light);
+    color: var(--primary); /* Explicitly set primary color here */
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: var(--transition);
+    display: inline-block;
+    border: none;
+    cursor: pointer;
+}
+
+.profileCta:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+    color: var(--primary-dark); /* Darken text on hover */
+}
+ .profileCta:active {
+     transform: translateY(0);
+     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Hero CTA uses global button classes */
+.heroCta {
+    /* No specific overrides needed unless desired */
+}
+
+
+/* Responsive Adjustments */
+@media (max-width: 991px) {
+    .hero {
+        padding: 150px 0 100px;
+    }
+    .heroContainer {
+        flex-direction: column;
+        text-align: center;
+    }
+    .heroContent {
+        max-width: 100%;
+        order: 2;
+    }
+    .profileContainer {
+        margin: 0 0 50px 0;
+        order: 1;
+    }
+}
+
+@media (max-width: 767px) {
+    .hero {
+        padding: 120px 0 60px;
+    }
+    .profileImage {
+         width: 160px;
+         height: 160px;
+    }
+    .profileName {
+        font-size: 1.6rem;
+    }
+     .heroSubtitle {
+        font-size: 1.2rem;
+    }
+    .profileContainer {
+         margin-bottom: 40px;
+    }
+}
+
+/* === ADD THESE RULES AT THE END === */
+
+/* Override text colors specifically within the hero section */
+.hero h1,
+.hero h2, /* This targets .profileName which is an h2 */
+.hero p {  /* This targets .heroSubtitle and .profileTitle which are p tags */
+    color: var(--light); /* Use the --light variable */
+}
+
+/* Optional: Re-apply opacity if needed, as the rule above might override it */
+.heroSubtitle {
+    opacity: 0.9;
+}
+
+.profileTitle {
+     opacity: 0.9;
+}
+
+/* Ensure profile CTA text color contrasts with its light background */
+.profileCta {
+     color: var(--primary); /* This was already set above, but good to be explicit */
+}
+.profileCta:hover {
+     color: var(--primary-dark); /* This was already set above */
+}
+/* === END OF RULES TO ADD === */
