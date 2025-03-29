@@ -1,12 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/api/meta-event",
-      "destination": "/api/meta-event.cjs"
-    },
-    {
-      "source": "/(.*)", 
-      "destination": "/index.html"
+      "source": "/((?!api/).*)", 
+      "destination": "/index.html" 
     }
   ]
 }
