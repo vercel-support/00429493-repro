@@ -1,8 +1,15 @@
 {
+  "functions": {
+    "api/meta-event.cjs": {
+      "memory": 128, 
+      "maxDuration": 10 
+    }
+  },
+
   "rewrites": [
     {
-      "source": "/((?!api/).*)", 
-      "destination": "/index.html" 
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
     }
   ]
 }
