@@ -4,12 +4,5 @@
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
-  ],
-  "routes": [
-    {
-      "src": "/api/meta-event",
-      "methods": ["POST"],
-      "dest": "/api/meta-event.mts"
-    }
   ]
 }
