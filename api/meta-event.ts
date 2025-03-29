@@ -1,4 +1,4 @@
-// api/meta-event.mts (This runs on Vercel's servers, not the browser)
+// api/meta-event.ts (This runs on Vercel's servers, not the browser)
 
 // Import types for Vercel Serverless Functions
 import type { VercelRequest, VercelResponse } from '@vercel/node';
