@@ -1,9 +1,10 @@
 {
   "functions": {
-    "api/meta-event.cjs": {
-      "memory": 128, 
-      "maxDuration": 10 
+    "api/**/*.cjs": { 
+      "memory": 128,
+      "maxDuration": 10
     }
+
   },
 
   "rewrites": [
