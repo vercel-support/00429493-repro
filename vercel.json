@@ -1,10 +1,5 @@
 {
   "rewrites": [
-
-    {
-      "source": "/api/meta-event",
-      "destination": "/api/meta-event.cjs" 
-    },
     {
       "source": "/((?!api/).*)",
       "destination": "/index.html"
