@@ -4,5 +4,12 @@
       "source": "/((?!api/).*)",
       "destination": "/index.html"
     }
+  ],
+  "routes": [
+    {
+      "src": "/api/meta-event",       // The path the browser calls
+      "methods": ["POST"],          // Allow POST
+      "dest": "/api/meta-event.mts"   // The actual RENAMED function file
+    }
   ]
 }
