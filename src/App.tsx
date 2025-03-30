@@ -1,8 +1,7 @@
 // src/App.tsx
 
 // --- Import React Hooks and Router ---
-// Removed 'React' from this import as it's not explicitly needed with modern JSX transform
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'; // Removed unused 'React'
 import { Routes, Route, useLocation } from 'react-router-dom';
 
 // --- Import Layout and UI Components ---
@@ -40,10 +39,10 @@ function App() {
         } else {
             console.warn('Meta Pixel (window.fbq) not found.');
         }
-        setIsMobileMenuOpen(false);
+        setIsMobileMenuOpen(false); // Close menu on navigation
     }, [location.pathname]);
 
-    // Navigation links data
+    // Navigation links data (still needed for MobileMenu and Footer)
     const navLinks = [
         { href: "/#about", label: "About the Program" }, { href: "/#about-mentor", label: "About Mia" },
         { href: "/#schedule", label: "Class Schedule" }, { href: "/#curriculum", label: "What You'll Learn" },
@@ -57,8 +56,20 @@ function App() {
     return (
         <>
             <SkipLink targetId="main-content" />
-            {!isThankYouPage && <Header onMenuToggle={toggleMobileMenu} navLinks={navLinks} />}
-            {!isThankYouPage && <MobileMenu isOpen={isMobileMenuOpen} onClose={toggleMobileMenu} navLinks={navLinks} />}
+
+            {/* Conditionally render Header - navLinks prop REMOVED */}
+            {!isThankYouPage && (
+                <Header onMenuToggle={toggleMobileMenu} />
+            )}
+
+            {/* Conditionally render MobileMenu - navLinks prop KEPT */}
+            {!isThankYouPage && (
+                <MobileMenu
+                    isOpen={isMobileMenuOpen}
+                    onClose={toggleMobileMenu}
+                    navLinks={navLinks}
+                />
+            )}
 
             <main id="main-content" role="main">
                 <Routes>
@@ -67,8 +78,15 @@ function App() {
                 </Routes>
             </main>
 
-            {!isThankYouPage && <Footer navLinks={navLinks} />}
-            {!isThankYouPage && <MobileBottomBar />}
+             {/* Conditionally render Footer - navLinks prop KEPT */}
+            {!isThankYouPage && (
+                <Footer navLinks={navLinks} />
+            )}
+
+            {/* Conditionally render MobileBottomBar */}
+            {!isThankYouPage && (
+                <MobileBottomBar />
+            )}
         </>
     );
 }
