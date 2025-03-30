@@ -1,41 +1,34 @@
 // src/components/sections/Pricing.tsx
 import React from 'react';
-import styles from './Pricing.module.css'; // Ensure this CSS module exists and is correct
+import styles from './Pricing.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { useInView } from 'react-intersection-observer';
 
-// Declare fbq for TypeScript
 declare global { interface Window { fbq?: (...args: any[]) => void; } }
 
 const Pricing: React.FC = () => {
     const { ref: sectionRef, inView: sectionInView } = useInView({ triggerOnce: true, threshold: 0.1 });
     const { ref: bannerRef, inView: bannerInView } = useInView({ triggerOnce: true, threshold: 0.1 });
     const { ref: card1Ref, inView: card1InView } = useInView({ triggerOnce: true, threshold: 0.1 });
-    const { ref: card2Ref, inView: card2InView } = useInView({ triggerOnce: true, threshold: 0.1, delay: 100 }); // Add small delay
-    const { ref: noteRef, inView: noteInView } = useInView({ triggerOnce: true, threshold: 0.1, delay: 200 }); // Add small delay
+    const { ref: card2Ref, inView: card2InView } = useInView({ triggerOnce: true, threshold: 0.1, delay: 100 });
+    const { ref: noteRef, inView: noteInView } = useInView({ triggerOnce: true, threshold: 0.1, delay: 200 });
 
-    // Function to fire Pixel event on button click
     const handleButtonClick = (planType: 'full' | 'deposit') => {
       const isFullPayment = planType === 'full';
       const eventData = {
           content_name: `Progressive Mediumship Course 2025 - ${isFullPayment ? 'Full Payment' : 'Payment Plan'}`,
           content_ids: [isFullPayment ? 'PMC2025-FULL' : 'PMC2025-PLAN'],
-          content_type: 'product',
-          currency: 'EUR',
-          value: isFullPayment ? 1295 : 395, // Full price or deposit value
+          content_type: 'product', currency: 'EUR',
+          value: isFullPayment ? 1295 : 395,
       };
-      if (window.fbq) {
-        console.log('Pixel: Firing InitiateCheckout event', eventData);
-        window.fbq('track', 'InitiateCheckout', eventData);
-      } else {
-        console.warn('Meta Pixel (fbq) not loaded.');
-      }
+      if (window.fbq) { window.fbq('track', 'InitiateCheckout', eventData); }
+      else { console.warn('Meta Pixel (fbq) not loaded.'); }
     };
 
     return (
         <section ref={sectionRef} className={`section ${styles.pricingSection}`} id="pricing">
-            <div className="container"> {/* Use global container */}
+            <div className="container">
                 <div className={`section-heading ${sectionInView ? 'animate fade-up' : 'animate'}`}>
                     <span className="section-subtitle">Join the 2025 Program</span>
                     <h2>Secure Your Place Today</h2>
@@ -48,7 +41,7 @@ const Pricing: React.FC = () => {
                 </div>
 
                 <div className={styles.pricingGrid}>
-                    {/* Pricing Card 1 - Full Payment */}
+                    {/* Card 1 */}
                     <div ref={card1Ref} className={`${styles.pricingCard} ${card1InView ? 'animate fade-up' : 'animate'}`}>
                         <div className={styles.pricingHeader}>
                             <div className={styles.pricingTitle}>FULL PAYMENT</div>
@@ -65,20 +58,11 @@ const Pricing: React.FC = () => {
                                 <li>Early registration savings of €100</li>
                                 <li>Supportive community access</li>
                             </ul>
-                            <a
-                                href="https://calendly.com/miaottosson/progressive-mediumship-2025/2025-04-09T18:00:00+02:00?month=2025-04&date=2025-04-09"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`btn btn-primary btn-block ${styles.pricingButton}`}
-                                onClick={() => handleButtonClick('full')}
-                            >
-                                Pay in Full
-                            </a>
+                            <a href="https://calendly.com/miaottosson/progressive-mediumship-2025/2025-04-09T18:00:00+02:00?month=2025-04&date=2025-04-09" target="_blank" rel="noopener noreferrer" className={`btn btn-primary btn-block ${styles.pricingButton}`} onClick={() => handleButtonClick('full')}>Pay in Full</a>
                             <p className={styles.pricingNote}><small>Early registration ends April 8th, 2025</small></p>
                         </div>
                     </div>
-
-                    {/* Pricing Card 2 - Payment Plan */}
+                    {/* Card 2 */}
                     <div ref={card2Ref} className={`${styles.pricingCard} ${card2InView ? `animate fade-up` : 'animate'}`}>
                         <div className={styles.pricingHeader}>
                             <div className={styles.pricingTitle}>PAYMENT PLAN</div>
@@ -95,31 +79,16 @@ const Pricing: React.FC = () => {
                                 <li>€395 deposit due at registration</li>
                                 <li>2 remaining payments of €500 every 3 months</li>
                             </ul>
-                             <a
-                                href="https://calendly.com/miaottosson/progressive-mediumship-2025-deposit/2025-04-08T18:00:00+02:00?month=2025-04&date=2025-04-08"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`btn btn-primary btn-block ${styles.pricingButton}`}
-                                onClick={() => handleButtonClick('deposit')}
-                             >
-                                Choose Payment Plan
-                            </a>
+                             <a href="https://calendly.com/miaottosson/progressive-mediumship-2025-deposit/2025-04-08T18:00:00+02:00?month=2025-04&date=2025-04-08" target="_blank" rel="noopener noreferrer" className={`btn btn-primary btn-block ${styles.pricingButton}`} onClick={() => handleButtonClick('deposit')}>Choose Payment Plan</a>
                             <p className={styles.pricingNote}><small>Please note: No BONUS private sessions for this option</small></p>
                         </div>
                     </div>
                 </div>
 
-                {/* Note Container - Includes both notes */}
+                {/* Note Container */}
                 <div ref={noteRef} className={`${styles.refundNoteContainer} ${noteInView ? `animate fade-up` : 'animate'}`}>
-                    {/* Existing Refund Policy */}
-                    <p className={styles.refundNoteText}>
-                        Please note: Due to the intensive nature of this personalized program and limited spots available, we are unable to offer refunds. By joining, you are committing to your complete development journey.
-                    </p>
-
-                    {/* New Bonus Session Note */}
-                    <p className={styles.bonusSessionNote}>
-                        *The bonus 1.5-hour private session included with the Full Payment option is dedicated time for discussing your personal mediumship development journey with Mia, not for private reading appointments.
-                    </p>
+                    <p className={styles.refundNoteText}>Please note: Due to the intensive nature of this personalized program and limited spots available, we are unable to offer refunds. By joining, you are committing to your complete development journey.</p>
+                    <p className={styles.bonusSessionNote}>*The bonus 1.5-hour private session included with the Full Payment option is dedicated time for discussing your personal mediumship development journey with Mia, not for private reading appointments.</p>
                 </div>
             </div>
         </section>

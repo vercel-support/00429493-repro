@@ -1,5 +1,5 @@
 // src/components/sections/Hero.tsx
-import React, { useState, useEffect } from 'react'; // Removed useCallback from import
+import React, { useState, useEffect } from 'react'; // Import hooks
 import styles from './Hero.module.css';
 import { useInView } from 'react-intersection-observer';
 
@@ -16,7 +16,6 @@ const calculateTimeLeft = (targetDate: Date) => {
             seconds: Math.floor((difference / 1000) % 60),
         };
     }
-    // console.log("calculateTimeLeft result:", timeLeft); // Keep commented out unless debugging
     return timeLeft;
 };
 
@@ -28,18 +27,14 @@ const Hero: React.FC = () => {
 
     // Effect for Countdown Timer
     useEffect(() => {
-        console.log("Hero component mounted."); // Log mount
-        setHasMounted(true);
-
-        // Initial calculation
-        setTimeLeft(calculateTimeLeft(targetDate));
+        setHasMounted(true); // Indicate component has mounted on client
+        setTimeLeft(calculateTimeLeft(targetDate)); // Initial calculation
 
         const timer = setInterval(() => {
             setTimeLeft(calculateTimeLeft(targetDate));
         }, 1000);
 
-        // Cleanup interval on component unmount
-        return () => clearInterval(timer);
+        return () => clearInterval(timer); // Cleanup interval
     }, []); // Empty dependency array, runs once on mount
 
     // Animation Refs
@@ -48,9 +43,6 @@ const Hero: React.FC = () => {
 
     // Helper for leading zeros
     const addLeadingZero = (value: number) => (value < 10 ? `0${value}` : value);
-
-    // Log rendering state
-    console.log("Rendering Hero - hasMounted:", hasMounted, "timeLeft:", timeLeft);
 
     return (
         <section className={styles.hero} id="hero">
@@ -69,7 +61,7 @@ const Hero: React.FC = () => {
                     </p>
 
                     {/* Countdown Timer */}
-                    {hasMounted && ( // Only render on client after mount
+                    {hasMounted && (
                         <div className={styles.countdownTimer}>
                             {timeLeft ? (
                                 <>

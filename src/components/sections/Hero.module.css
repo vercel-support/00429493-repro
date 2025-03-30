@@ -1,33 +1,21 @@
 /* src/components/sections/Hero.module.css */
-.hero {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-    color: var(--light);
-    padding: 200px 0 120px; /* Desktop padding */
-    position: relative;
-    overflow: hidden;
-}
-
-.hero::before {
-    content: ""; position: absolute; top: 0; right: 0; width: 60%; height: 100%;
-    background-image: url('https://images.unsplash.com/photo-1508515053969-5B7694713f53?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'); /* Example */
-    background-size: cover; background-position: center; opacity: 0.08; z-index: 0; pointer-events: none;
-}
-
-/* Desktop Layout: Row */
-.heroContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-    position: relative;
-    z-index: 1; /* Content above ::before */
-    /* Uses global .container */
-}
-
+.hero { background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); color: var(--light); padding: 180px 0 120px; position: relative; overflow: hidden; }
+.hero::before { content: ""; position: absolute; top: 0; right: 0; width: 60%; height: 100%; background-image: url('https://images.unsplash.com/photo-1508515053969-5B7694713f53?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80'); background-size: cover; background-position: center; opacity: 0.08; z-index: 0; pointer-events: none; }
+.heroContainer { display: flex; align-items: center; justify-content: space-between; gap: 40px; position: relative; z-index: 1; /* Uses global .container */ }
 .heroContent { flex: 1; max-width: 600px; }
-.heroSubtitle { font-size: 1.5rem; font-weight: 500; margin-bottom: 30px; opacity: 0.9; line-height: 1.5; }
-.eyebrow { display: inline-block; background-color: rgba(255,255,255,0.1); color: var(--light); padding: 8px 16px; border-radius: 50px; font-size: 0.875rem; font-weight: 500; margin-bottom: 24px; text-transform: uppercase; letter-spacing: 1px; }
-.heroCta { /* Uses global .btn styles */ }
+.heroSubtitle { font-size: 1.5rem; font-weight: 500; margin-bottom: 25px; opacity: 0.9; line-height: 1.5; }
+.eyebrow { display: inline-block; background-color: rgba(255,255,255,0.1); color: var(--light); padding: 8px 16px; border-radius: 50px; font-size: 0.875rem; font-weight: 500; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; }
+.heroCta { margin-top: 30px; }
+
+/* START DATE ALERT STYLES */
+.startDateAlert { display: inline-block; background-color: rgba(255, 255, 255, 0.15); color: var(--light); font-size: 0.9rem; font-weight: 600; padding: 6px 15px; border-radius: 50px; margin-bottom: 25px; border: 1px solid rgba(255, 255, 255, 0.2); }
+
+/* COUNTDOWN TIMER STYLES */
+.countdownTimer { display: flex; gap: 15px; justify-content: flex-start; margin-top: 15px; margin-bottom: 25px; flex-wrap: wrap; }
+.timeBlock { display: flex; flex-direction: column; align-items: center; justify-content: center; background-color: rgba(255, 255, 255, 0.08); padding: 10px 15px; border-radius: var(--border-radius, 8px); min-width: 65px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.timeValue { font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 700; line-height: 1.1; color: var(--light); margin-bottom: 2px; }
+.timeLabel { font-size: 0.7rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.8px; opacity: 0.8; color: var(--light); }
+.timerEnded { font-size: 1.1rem; font-weight: 600; color: var(--accent-secondary); padding: 10px; text-align: left; width: 100%; }
 
 /* Profile Styles */
 .profileContainer { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
@@ -41,62 +29,11 @@
 .profileCta:hover { transform: translateY(-3px); box-shadow: 0 8px 15px rgba(0,0,0,0.15); color: var(--primary-dark); }
 .profileCta:active { transform: translateY(0); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
 
-/* Text Color Override within Hero */
+/* Text Color Override */
 .hero h1, .hero h2, .hero p { color: var(--light); }
 .heroSubtitle, .profileTitle { opacity: 0.9; color: var(--light); }
-.profileCta { color: var(--primary); }
-.profileCta:hover { color: var(--primary-dark); }
+.profileCta { color: var(--primary); } .profileCta:hover { color: var(--primary-dark); }
 
-/* --- Responsive --- */
-
-/* Tablet and smaller (991px and below) - Stack vertically */
-@media (max-width: 991px) {
-    .hero {
-        padding: 150px 0 80px; /* Adjust padding */
-    }
-    .heroContainer {
-        flex-direction: column; /* Stack elements */
-        text-align: center; /* Center align text */
-        gap: 40px; /* Adjust gap */
-    }
-    /* Stacking Order */
-    .heroContent {
-        max-width: 100%;
-        order: 1; /* Text content comes first */
-    }
-    .profileContainer {
-        margin: 40px auto 0 auto; /* Add space ABOVE and center profile block */
-        order: 2; /* Profile comes second */
-        width: auto;
-    }
-}
-
-/* Mobile specific adjustments (767px and below) */
-@media (max-width: 767px) {
-    .hero {
-        padding: 100px 0 40px; /* Original mobile padding */
-        padding-top: 80px; /* Add back extra top padding for transparent header */
-    }
-    .heroContainer {
-         gap: 30px;
-    }
-    .heroContent {
-        padding: 0; /* Match original mobile styles */
-        order: 1; /* Ensure text is first */
-    }
-     .heroSubtitle {
-        font-size: 1.2rem; /* Match original */
-    }
-    .profileContainer {
-        max-width: 280px; /* Match original */
-        margin-top: 30px; /* Adjust mobile space */
-        order: 2; /* Ensure profile is second */
-    }
-    .profileImage {
-         width: 160px; /* Match original */
-         height: 160px;
-    }
-    .profileName {
-        font-size: 1.6rem;
-    }
-}
+/* Responsive */
+@media (max-width: 991px) { .hero { padding: 150px 0 80px; } .heroContainer { flex-direction: column; text-align: center; gap: 40px; } .heroContent { max-width: 100%; order: 1; } .profileContainer { margin: 40px auto 0 auto; order: 2; width: auto; } .countdownTimer { justify-content: center; } .startDateAlert { margin-left: auto; margin-right: auto; } }
+@media (max-width: 767px) { .hero { padding: 100px 0 40px; padding-top: 80px; } .heroContainer { gap: 30px; } .heroContent { padding: 0; order: 1; } .heroSubtitle { font-size: 1.2rem; } .profileContainer { max-width: 280px; margin-top: 30px; order: 2; } .profileImage { width: 160px; height: 160px; } .profileName { font-size: 1.6rem; } .startDateAlert { font-size: 0.85rem; padding: 5px 12px; margin-bottom: 20px;} .countdownTimer { gap: 10px; margin-bottom: 25px; justify-content: center;} .timeBlock { padding: 8px 10px; min-width: 60px; } .timeValue { font-size: 1.5rem; } .timeLabel { font-size: 0.65rem; } .timerEnded { font-size: 1rem;} }
