@@ -4,15 +4,16 @@
     top: 0;
     left: 0;
     width: 100%;
-    padding: 30px 0;
-    z-index: 100; /* Ensure header is above hero background */
+    padding: 30px 0; /* Desktop padding */
+    z-index: 100;
+    transition: background-color 0.3s ease; /* Add transition for background */
 }
 
 .headerContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* Uses global .container for max-width and padding */
+    /* Uses global .container */
 }
 
 .logo {
@@ -22,23 +23,23 @@
     color: var(--light);
     text-decoration: none;
     transition: opacity 0.3s ease;
-    position: relative; /* Needed for z-index */
-    z-index: 101; /* Above hero ::before */
+    position: relative;
+    z-index: 101;
 }
 .logo:hover {
     opacity: 0.8;
 }
 
 .mobileMenuBtn {
-    display: none; /* Hidden by default, shown via media query */
+    display: none; /* Hidden by default */
     background: none;
     border: none;
     color: var(--light);
-    font-size: 1.8rem; /* Slightly larger tap target */
+    font-size: 1.8rem;
     cursor: pointer;
-    padding: 5px; /* Add padding for easier tapping */
-    line-height: 1; /* Prevent extra space */
-    border-radius: 4px; /* Subtle rounding */
+    padding: 5px;
+    line-height: 1;
+    border-radius: 4px;
     position: relative;
     z-index: 101;
 }
@@ -47,34 +48,59 @@
      outline-offset: 2px;
 }
 
-/* Desktop enroll button - uses global .btn and .btn-light */
 .desktopEnrollBtn {
-   /* No specific overrides needed unless changing base .btn-light */
-   position: relative; /* Needed for z-index */
-   z-index: 101; /* Above hero ::before */
+   /* Uses global .btn and .btn-light */
+   position: relative;
+   z-index: 101;
 }
-
 
 /* --- Responsive --- */
 @media (max-width: 767px) {
     .header {
-        padding: 20px 0; /* Adjust mobile padding */
+        padding: 15px 0; /* Reduced padding for mobile */
+        /* Make background transparent to blend with hero */
+        background-color: transparent;
+        position: absolute; /* Keep it positioned absolutely */
     }
+    .headerContainer {
+        /* Adjust alignment for mobile if logo needs centering */
+        /* justify-content: center; */ /* Uncomment to center logo+button */
+        /* position: relative; */ /* Needed if centering */
+    }
+     .logo {
+         /* If centering, adjust positioning */
+         /* position: absolute; */
+         /* left: 50%; */
+         /* transform: translateX(-50%); */
+         /* If not centering, ensure it's visible */
+         flex-grow: 1; /* Allow logo to take space */
+         text-align: left; /* Or center if desired */
+         margin-left: 5px; /* Ensure some padding */
+     }
+
     .mobileMenuBtn {
-        display: block; /* Show mobile menu button */
+        display: block; /* Show mobile button */
+        /* If centering logo, position menu button absolutely */
+        /* position: absolute; */
+        /* right: 0; */
+        /* top: 50%; */
+        /* transform: translateY(-50%); */
+        margin-right: 5px; /* Ensure some padding */
     }
+
     .desktopEnrollBtn {
-        display: none; /* Hide desktop enroll button */
+        display: none; /* Hide desktop button */
     }
 }
 
-/* Ensure correct visibility on larger screens */
+/* Desktop view */
 @media (min-width: 768px) {
      .mobileMenuBtn {
-         display: none; /* Hide mobile button */
+         display: none;
      }
      .desktopEnrollBtn {
-          /* Ensure display is correct if default .btn is not inline-flex */
          display: inline-flex;
      }
+     /* Ensure header background isn't transparent on desktop if needed */
+     /* .header { background-color: transparent; } */
 }
