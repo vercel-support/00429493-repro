@@ -6,14 +6,14 @@
     width: 100%;
     padding: 30px 0; /* Desktop padding */
     z-index: 100;
-    transition: background-color 0.3s ease; /* Add transition for background */
+    transition: background-color 0.3s ease;
 }
 
 .headerContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* Uses global .container */
+    /* Uses global .container for max-width and padding */
 }
 
 .logo {
@@ -31,7 +31,7 @@
 }
 
 .mobileMenuBtn {
-    display: none; /* Hidden by default */
+    display: none; /* Hidden by default, shown via media query */
     background: none;
     border: none;
     color: var(--light);
@@ -48,11 +48,13 @@
      outline-offset: 2px;
 }
 
+/* Desktop enroll button - uses global .btn and .btn-light */
 .desktopEnrollBtn {
-   /* Uses global .btn and .btn-light */
+   /* No specific overrides needed unless changing base .btn-light */
    position: relative;
    z-index: 101;
 }
+
 
 /* --- Responsive --- */
 @media (max-width: 767px) {
@@ -68,38 +70,30 @@
         /* position: relative; */ /* Needed if centering */
     }
      .logo {
-         /* If centering, adjust positioning */
-         /* position: absolute; */
-         /* left: 50%; */
-         /* transform: translateX(-50%); */
          /* If not centering, ensure it's visible */
          flex-grow: 1; /* Allow logo to take space */
          text-align: left; /* Or center if desired */
          margin-left: 5px; /* Ensure some padding */
+         font-size: 1.3rem; /* Slightly smaller on mobile */
      }
 
     .mobileMenuBtn {
         display: block; /* Show mobile button */
-        /* If centering logo, position menu button absolutely */
-        /* position: absolute; */
-        /* right: 0; */
-        /* top: 50%; */
-        /* transform: translateY(-50%); */
         margin-right: 5px; /* Ensure some padding */
     }
 
     .desktopEnrollBtn {
-        display: none; /* Hide desktop button */
+        display: none; /* Hide desktop enroll button */
     }
 }
 
 /* Desktop view */
 @media (min-width: 768px) {
      .mobileMenuBtn {
-         display: none;
+         display: none; /* Hide mobile button */
      }
      .desktopEnrollBtn {
-         display: inline-flex;
+         display: inline-flex; /* Ensure it shows */
      }
      /* Ensure header background isn't transparent on desktop if needed */
      /* .header { background-color: transparent; } */
