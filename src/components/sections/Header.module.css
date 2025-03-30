@@ -5,13 +5,14 @@
     left: 0;
     width: 100%;
     padding: 30px 0;
-    z-index: 100;
+    z-index: 100; /* Ensure header is above hero background */
 }
 
 .headerContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    /* Uses global .container for max-width and padding */
 }
 
 .logo {
@@ -21,13 +22,15 @@
     color: var(--light);
     text-decoration: none;
     transition: opacity 0.3s ease;
+    position: relative; /* Needed for z-index */
+    z-index: 101; /* Above hero ::before */
 }
 .logo:hover {
     opacity: 0.8;
 }
 
 .mobileMenuBtn {
-    display: none; /* Hidden by default, shown in media query */
+    display: none; /* Hidden by default, shown via media query */
     background: none;
     border: none;
     color: var(--light);
@@ -36,6 +39,8 @@
     padding: 5px; /* Add padding for easier tapping */
     line-height: 1; /* Prevent extra space */
     border-radius: 4px; /* Subtle rounding */
+    position: relative;
+    z-index: 101;
 }
 .mobileMenuBtn:focus-visible {
      outline: 2px solid var(--light);
@@ -44,46 +49,32 @@
 
 /* Desktop enroll button - uses global .btn and .btn-light */
 .desktopEnrollBtn {
-   /* Add specific overrides if needed */
+   /* No specific overrides needed unless changing base .btn-light */
+   position: relative; /* Needed for z-index */
+   z-index: 101; /* Above hero ::before */
 }
 
-/* Responsive */
+
+/* --- Responsive --- */
 @media (max-width: 767px) {
+    .header {
+        padding: 20px 0; /* Adjust mobile padding */
+    }
     .mobileMenuBtn {
-        display: block;
+        display: block; /* Show mobile menu button */
     }
-
     .desktopEnrollBtn {
-        display: none; /* Hide desktop button on mobile */
-    }
-     .header {
-        padding: 20px 0; /* Reduce padding on mobile */
+        display: none; /* Hide desktop enroll button */
     }
 }
-/* src/components/sections/Hero.module.css */
 
-/* ... (keep existing styles for .hero, .profileImage etc.) ... */
-
-/* Add these rules to override text color inside .hero */
-.hero h1,
-.hero h2, /* Target .profileName */
-.hero p { /* Target .heroSubtitle and .profileTitle */
-    color: var(--light); /* Use the light color variable */
-}
-
-/* Optional: Ensure subtitle isn't too bright if needed */
-.heroSubtitle {
-    opacity: 0.9; /* Keep original opacity */
-}
-
-.profileTitle {
-     opacity: 0.9; /* Keep original opacity */
-}
-
-/* Ensure profile CTA text color is correct if needed (should be primary) */
-.profileCta {
-     color: var(--primary);
-}
-.profileCta:hover {
-     color: var(--primary-dark);
+/* Ensure correct visibility on larger screens */
+@media (min-width: 768px) {
+     .mobileMenuBtn {
+         display: none; /* Hide mobile button */
+     }
+     .desktopEnrollBtn {
+          /* Ensure display is correct if default .btn is not inline-flex */
+         display: inline-flex;
+     }
 }
