@@ -1,11 +1,13 @@
 // src/components/sections/Hero.tsx
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react'; // Removed useCallback from import
 import styles from './Hero.module.css';
 import { useInView } from 'react-intersection-observer';
 
+// Helper function to calculate time left
 const calculateTimeLeft = (targetDate: Date) => {
     const difference = +targetDate - +new Date();
     let timeLeft: { days: number; hours: number; minutes: number; seconds: number } | null = null;
+
     if (difference > 0) {
         timeLeft = {
             days: Math.floor(difference / (1000 * 60 * 60 * 24)),
@@ -14,36 +16,40 @@ const calculateTimeLeft = (targetDate: Date) => {
             seconds: Math.floor((difference / 1000) % 60),
         };
     }
-    // --- ADD LOG ---
-    // console.log("calculateTimeLeft result:", timeLeft); // Uncomment for verbose debugging
+    // console.log("calculateTimeLeft result:", timeLeft); // Keep commented out unless debugging
     return timeLeft;
 };
 
 const Hero: React.FC = () => {
-    const targetDate = new Date('2025-04-09T18:00:00+02:00'); // Target: April 9, 2025, 6:00 PM CEST (UTC+2)
-    const [timeLeft, setTimeLeft] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null); // Initialize as null
+    // Target Date: April 9, 2025, 6:00 PM CEST (UTC+2)
+    const targetDate = new Date('2025-04-09T18:00:00+02:00');
+    const [timeLeft, setTimeLeft] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null);
     const [hasMounted, setHasMounted] = useState(false);
 
+    // Effect for Countdown Timer
     useEffect(() => {
-        console.log("Hero component mounted."); // <-- ADD LOG
+        console.log("Hero component mounted."); // Log mount
         setHasMounted(true);
 
-        // Initial calculation immediately on mount
+        // Initial calculation
         setTimeLeft(calculateTimeLeft(targetDate));
 
         const timer = setInterval(() => {
             setTimeLeft(calculateTimeLeft(targetDate));
         }, 1000);
 
+        // Cleanup interval on component unmount
         return () => clearInterval(timer);
     }, []); // Empty dependency array, runs once on mount
 
+    // Animation Refs
     const { ref: contentRef, inView: contentInView } = useInView({ triggerOnce: true, threshold: 0.1 });
     const { ref: profileRef, inView: profileInView } = useInView({ triggerOnce: true, threshold: 0.1, delay: 100 });
 
+    // Helper for leading zeros
     const addLeadingZero = (value: number) => (value < 10 ? `0${value}` : value);
 
-    // --- ADD LOG ---
+    // Log rendering state
     console.log("Rendering Hero - hasMounted:", hasMounted, "timeLeft:", timeLeft);
 
     return (
@@ -53,16 +59,17 @@ const Hero: React.FC = () => {
                     ref={contentRef}
                     className={`${styles.heroContent} ${contentInView ? 'animate fade-up' : 'animate'}`}
                 >
+                    {/* Start Date Alert */}
                     <p className={styles.startDateAlert}>Starts April 9th, 2025</p>
+
                     <span className={styles.eyebrow}>8+ Month Immersive Program</span>
                     <h1>2025 Progressive Mediumship Course</h1>
                     <p className={styles.heroSubtitle}>
                         "As a medium, you are not allowed to give away your power — you are in charge of the sitting."
                     </p>
 
-                    {/* --- COUNTDOWN TIMER --- */}
-                    {/* Render based on hasMounted AND timeLeft */}
-                    {hasMounted && (
+                    {/* Countdown Timer */}
+                    {hasMounted && ( // Only render on client after mount
                         <div className={styles.countdownTimer}>
                             {timeLeft ? (
                                 <>
@@ -76,7 +83,7 @@ const Hero: React.FC = () => {
                             )}
                         </div>
                     )}
-                    {/* --- END COUNTDOWN TIMER --- */}
+                    {/* End Countdown Timer */}
 
                     <a href="#about" className={`btn btn-accent btn-large ${styles.heroCta}`}>
                         Discover Your Medium Path
@@ -85,8 +92,7 @@ const Hero: React.FC = () => {
 
                  {/* Profile Container */}
                 <div ref={profileRef} className={`${styles.profileContainer} ${profileInView ? 'animate fade-up' : 'animate'}`}>
-                    {/* ... profile content ... */}
-                     <div className={styles.profileImageWrapper}>
+                    <div className={styles.profileImageWrapper}>
                         <div className={styles.profileGlow}></div>
                         <img src="/images/mia-ottosson.jpeg" alt="Mia Ottosson" className={styles.profileImage} loading="eager" fetchPriority="high" />
                     </div>
